@@ -1,0 +1,20 @@
+{
+  "name": "praytimes",
+  "version": "1.0.0",
+  "description": "appliction for calculating Muslim prayers times.",
+  "main": "PrayTimes.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git remove -v"
+  },
+  "keywords": [
+    "muslim",
+    "praytimes",
+    "calculator"
+  ],
+  "author": "Rahman",
+  "license": "UNLICENSED"
+}

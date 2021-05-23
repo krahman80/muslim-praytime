@@ -16,5 +16,11 @@
     "calculator"
   ],
   "author": "Rahman",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "adhan": "^4.1.0",
+    "cities.json": "^1.1.5",
+    "dayjs": "^1.10.4",
+    "tz-lookup": "^6.1.25"
+  }
 }

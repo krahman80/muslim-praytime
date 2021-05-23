@@ -1,12 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <script src="./node_modules/adhan/Adhan.js"></script>
     <title>Pray times</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row py-3 px-3">
+          <h5>Find Praying times</h5>
+          <!-- <p>Find praying times</p> -->
+      </div>
+      <div class="row py-3 px-3">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            id="search-term"
+            placeholder="Search city"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-secondary" type="button" id="search-btn">
+              search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row py-3 px-3 my-3">
+        <div id="search-result">
+          <h5>Search Result</h5>
+          <div id="badge-result">
+            <a href="#" class="badge badge-dark  p-2 mr-3 mt-3">result 01</a>
+            <a href="#" class="badge badge-info  p-2 mr-3 mt-3">result 02</a>
+            <a href="#" class="badge badge-secondary  p-2 mr-3 mt-3">result 03</a>
+          </div>
+        </div>  
+      </div>
+      <div class="row py-3 px-3 my-3">
+        <h5>Praying Times in Searched City</h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      var date = new Date();
+      var coordinates = new adhan.Coordinates(43.062096, 141.35437);
+      var params = adhan.CalculationMethod.MuslimWorldLeague();
+      params.madhab = adhan.Madhab.Hanafi;
+      var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
+
+      console.log(prayerTimes.fajr);
+      console.log(prayerTimes.sunrise);
+      console.log("test");
+    </script>
+
+    <script src="app.js"></script>
+  </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "praytimes",
   "version": "1.0.0",
-  "description": "appliction for calculating Muslim prayers times.",
+  "description": "appliction for calculating Muslim praying times.",
   "main": "PrayTimes.js",
   "scripts": {
     "test": "npm test"
@@ -20,7 +20,8 @@
   "dependencies": {
     "adhan": "^4.1.0",
     "cities.json": "^1.1.5",
-    "dayjs": "^1.10.4",
+    "dayjs": "^1.10.5",
+    "spacetime": "^6.16.1",
     "tz-lookup": "^6.1.25"
   }
 }

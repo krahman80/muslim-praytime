@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="bootstrap.min.css" />
-    <script src="./node_modules/adhan/Adhan.js"></script>
-    <title>Pray times</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="row py-3 px-3">
-          <h5>Find Praying times</h5>
-          <!-- <p>Find praying times</p> -->
-      </div>
-      <div class="row py-3 px-3">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            id="search-term"
-            placeholder="Search city"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-secondary" type="button" id="search-btn">
-              search
-            </button>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="bootstrap.min.css" />
+  <script src="./node_modules/adhan/Adhan.js"></script>
+  <script src="./node_modules/tz-lookup/tz.js"></script>
+  <script src="./node_modules/spacetime/builds/spacetime.js"></script>
+  <script src="./node_modules/dayjs/dayjs.min.js"></script>
+  <script src="./node_modules/dayjs/plugin/utc.js"></script>
+  <script src="./node_modules/dayjs/plugin/timezone.js"></script>
+  <title>Pray times</title>
+</head>
+
+<body>
+  <div class="container">
+    <!-- search bar -->
+    <div class="row py-3 px-3">
+      <h5>Find Praying times</h5>
+      <!-- <p>Find praying times</p> -->
+    </div>
+    <div class="row py-3 px-3">
+      <div class="input-group">
+        <input type="text" class="form-control" id="search-term" placeholder="Search city" />
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="button" id="search-btn">
+            search
+          </button>
         </div>
       </div>
-      <div class="row py-3 px-3 my-3">
+    </div>
+    <!-- end -->
+    <!-- city search result -->
+    <div class="row py-3 px-3 my-3">
+        <div> 
+        <h5>Search Result</h5>
         <div id="search-result">
-          <h5>Search Result</h5>
-          <div id="badge-result">
-            <a href="#" class="badge badge-dark  p-2 mr-3 mt-3">result 01</a>
-            <a href="#" class="badge badge-info  p-2 mr-3 mt-3">result 02</a>
-            <a href="#" class="badge badge-secondary  p-2 mr-3 mt-3">result 03</a>
-          </div>
-        </div>  
+        <!-- <a href="#" class="badge badge-dark  p-2 mr-3 mt-3">result 01</a>
+          <a href="#" class="badge badge-info  p-2 mr-3 mt-3">result 02</a>
+          <a href="#" class="badge badge-secondary  p-2 mr-3 mt-3">result 03</a> -->
+        </div>
       </div>
-      <div class="row py-3 px-3 my-3">
-        <h5>Praying Times in Searched City</h3>
+    </div>
+    <!-- end -->
+    <!-- city praying time -->
+    <div class="row py-3 px-3 my-3">
+      <h5>Praying Times in Searched City</h3>
         <table class="table table-striped">
           <thead>
             <tr>
@@ -71,21 +78,26 @@
             </tr>
           </tbody>
         </table>
-      </div>
     </div>
+    <!-- end -->
+  </div>
 
-    <script>
-      var date = new Date();
-      var coordinates = new adhan.Coordinates(43.062096, 141.35437);
-      var params = adhan.CalculationMethod.MuslimWorldLeague();
-      params.madhab = adhan.Madhab.Hanafi;
-      var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
+  <script>
+    // var date = new Date();
+    // var coordinates = new adhan.Coordinates(43.062096, 141.35437);
+    // var params = adhan.CalculationMethod.MuslimWorldLeague();
+    // params.madhab = adhan.Madhab.Hanafi;
+    // var prayerTimes = new adhan.PrayerTimes(coordinates, date, params);
 
-      console.log(prayerTimes.fajr);
-      console.log(prayerTimes.sunrise);
-      console.log("test");
-    </script>
+    // console.log(prayerTimes.fajr);
+    // console.log(prayerTimes.sunrise);
+    // console.log("test");
+    dayjs().format();
+    dayjs.extend(window.dayjs_plugin_utc);
+    dayjs.extend(window.dayjs_plugin_timezone);
+  </script>
 
-    <script src="app.js"></script>
-  </body>
+  <script src="app.js"></script>
+</body>
+
 </html>

@@ -2,12 +2,19 @@
 const SearchTerm = document.getElementById('search-term');
 const SearchBtn = document.getElementById('search-btn');
 const SearchResult = document.getElementById('search-result');
-
+const TimeTable = document.getElementById('time-table');
+const CityName = document.getElementById('city-name');
+// const fileloc = 'test.json';
+const fileloc = './node_modules/cities.json/cities.json';
 //functions
 SearchBtn.addEventListener('click', ActionSearch);
 
 //get Search Result Element
 SearchResult.addEventListener('click', (e) => {
+  GetCityLoc(e);
+});
+
+function GetCityLoc(e) {
   e.preventDefault;
   e.stopPropagation;
 
@@ -23,63 +30,112 @@ SearchResult.addEventListener('click', (e) => {
   if (info) {
     const lat = info.getAttribute('data-lat');
     const lng = info.getAttribute('data-lng');
-    console.log(lat + ' - ' + lng);
-
-    // console.log(tzlookup(lat, lng));
-    const locale = tzlookup(lat, lng);
-    console.log(locale);
-
-    // let dyear = spacetime.now(locale).format('year');
-    // let dmonth = spacetime.now(locale).format('month-pad');
-    // let dday = spacetime.now(locale).format('date-pad');
-    const mydate = new Date();
-    console.log(mydate);
-    //console.log(dayjs.tz(mydate, locale).format('h:mm A'));
-    // const test = new Date(dyear, dmonth, dday);
-    // let date = new Date(2021, 28, 05);
-
-    var coordinates = new adhan.Coordinates(lat, lng);
-    var params = adhan.CalculationMethod.MuslimWorldLeague();
-    params.madhab = adhan.Madhab.Hanafi;
-    var prayerTimes = new adhan.PrayerTimes(coordinates, mydate, params);
-    //console.log(dayjs.tz('2021-28-05 00:00', 'America/New_York'));
-    let fajrTime = dayjs(prayerTimes.fajr).tz(locale).format('h:mm A');
-    let sunriseTime = dayjs(prayerTimes.sunrise).tz(locale).format('h:mm A');
-    let dhuhrTime = dayjs(prayerTimes.dhuhr).tz(locale).format('h:mm A');
-    let asrTime = dayjs(prayerTimes.asr).tz(locale).format('h:mm A');
-    let maghribTime = dayjs(prayerTimes.maghrib).tz(locale).format('h:mm A');
-    let ishaTime = dayjs(prayerTimes.isha).tz(locale).format('h:mm A');
-    console.log(fajrTime + '~' + sunriseTime + '~' + dhuhrTime + '~' + asrTime);
-  }
-
-  // console.log("test");
-});
-
-function ActionSearch() {
-  SearchResult.innerHTML = '';
-  if (SearchTerm.value === '') {
-    console.log('empty search term');
-    BadgeResult.innerHTML = '';
-  } else {
-    // console.log(SearchTerm.value);
-    let url = 'http://localhost:3000/cities?q=' + SearchTerm.value;
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('get', url, true);
-    xhr.send();
-
-    xhr.onload = function () {
-      if (this.status === 200) {
-        ShowResult(this.responseText);
-      } else {
-        console.log(this.statusText);
-      }
-    };
+    const city = info.getAttribute('data-cityName');
+    //console.log(lat + ' - ' + lng);
+    AppendPrayTimes(lat, lng, city);
   }
 }
 
-function ShowResult(resultText) {
-  const jsonResult = JSON.parse(resultText);
+function AppendPrayTimes(lat, lng, city) {
+  // console.log(tzlookup(lat, lng));
+  const locale = tzlookup(lat, lng);
+  // console.log(locale);
+  const mydate = new Date();
+
+  var coordinates = new adhan.Coordinates(lat, lng);
+  var params = adhan.CalculationMethod.MoonsightingCommittee();
+  params.madhab = adhan.Madhab.Hanafi;
+  var prayerTimes = new adhan.PrayerTimes(coordinates, mydate, params);
+  //console.log(dayjs.tz('2021-28-05 00:00', 'America/New_York'));
+  const fajrTime = dayjs(prayerTimes.fajr).tz(locale).format('HH:mm');
+  const sunriseTime = dayjs(prayerTimes.sunrise).tz(locale).format('HH:mm');
+  const dhuhrTime = dayjs(prayerTimes.dhuhr).tz(locale).format('HH:mm');
+  const asrTime = dayjs(prayerTimes.asr).tz(locale).format('HH:mm');
+  const maghribTime = dayjs(prayerTimes.maghrib).tz(locale).format('HH:mm');
+  const ishaTime = dayjs(prayerTimes.isha).tz(locale).format('HH:mm');
+  //console.log(fajrTime + '/' + sunriseTime + '/' + dhuhrTime + '/' + asrTime);
+
+  TimeTable.innerHTML = '';
+  CityName.innerHTML = '';
+  const prayTimeTable = `
+  <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fajr</th>
+                <th scope="col">Duhr</th>
+                <th scope="col">Asr</th>
+                <th scope="col">Magrib</th>
+                <th scope="col">Isha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>${fajrTime}</td>
+                <td>${dhuhrTime}</td>
+                <td>${asrTime}</td>
+                <td>${maghribTime}</td>
+                <td>${ishaTime}</td>
+              </tr>
+            </tbody>
+          </table>
+  `;
+  CityName.innerHTML = `Pray Time in ${city}`;
+  TimeTable.innerHTML = prayTimeTable;
+}
+
+function ActionSearch() {
+  SearchResult.innerHTML = '';
+  let SearchText = SearchTerm.value;
+  if (SearchText === '') {
+    console.log('empty search term');
+    BadgeResult.innerHTML = '';
+  } else {
+    // let url = 'http://localhost:3000/cities?q=' + SearchTerm.value;
+    // const xhr = new XMLHttpRequest();
+    // xhr.open('get', url, true);
+    // xhr.send();
+    // xhr.onload = function () {
+    //   if (this.status === 200) {
+    //     ShowResult(this.responseText);
+    //   } else {
+    //     console.log(this.statusText);
+    //   }
+    // };
+    fetch(fileloc)
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (data) {
+        let regex = new RegExp(SearchText, 'gi');
+        let newData = [];
+
+        data.forEach(function (val, key) {
+          if (val.name.search(regex) != -1) {
+            // console.log(val.name);
+            let newObj = {};
+            newObj.name = val.name;
+            newObj.country = val.country;
+            newObj.lat = val.lat;
+            newObj.lng = val.lng;
+            newData.push(newObj);
+          }
+        });
+        ShowResult(newData);
+        //console.log(newData);
+        //console.log(typeof newData);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+
+    // console.log(SearchText);
+  }
+}
+
+function ShowResult(jsonResult) {
+  //const jsonResult = JSON.parse(resultText);
   //console.log(jsonResult);
   // jsonResult.forEach(function (res) {
   //   console.log(res.name);

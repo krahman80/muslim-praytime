@@ -54,9 +54,7 @@ function AppendPrayTimes(lat, lng, city) {
   const maghribTime = dayjs(prayerTimes.maghrib).tz(locale).format('HH:mm');
   const ishaTime = dayjs(prayerTimes.isha).tz(locale).format('HH:mm');
   //console.log(fajrTime + '/' + sunriseTime + '/' + dhuhrTime + '/' + asrTime);
-
-  TimeTable.innerHTML = '';
-  CityName.innerHTML = '';
+  ClearPrayTable();
   const prayTimeTable = `
   <table class="table table-striped">
             <thead>
@@ -81,16 +79,30 @@ function AppendPrayTimes(lat, lng, city) {
             </tbody>
           </table>
   `;
-  CityName.innerHTML = `Pray Time in ${city}`;
+  CityName.innerHTML = `Pray Time in ${city} (${locale}), Today ${dayjs().format(
+    'DD/MM/YYYY'
+  )}.`;
   TimeTable.innerHTML = prayTimeTable;
 }
 
-function ActionSearch() {
+function ClearPrayTable() {
+  TimeTable.innerHTML = '';
+  CityName.innerHTML = '';
+}
+
+function ClearSearchResult() {
   SearchResult.innerHTML = '';
+  TimeTable.innerHTML = '';
+  CityName.innerHTML = '';
+}
+
+function ActionSearch() {
+  ClearSearchResult();
+
   let SearchText = SearchTerm.value;
   if (SearchText === '') {
-    console.log('empty search term');
-    BadgeResult.innerHTML = '';
+    // console.log('empty search term');
+    // BadgeResult.innerHTML = '';
   } else {
     // let url = 'http://localhost:3000/cities?q=' + SearchTerm.value;
     // const xhr = new XMLHttpRequest();
@@ -122,8 +134,13 @@ function ActionSearch() {
             newData.push(newObj);
           }
         });
-        ShowResult(newData);
-        //console.log(newData);
+        if (newData.length >= 1) {
+          ShowResult(newData);
+        } else {
+          // console.log('data not found');
+          SearchResult.innerHTML = 'City name not found!';
+        }
+        // console.log(newData);
         //console.log(typeof newData);
       })
       .catch(function (err) {

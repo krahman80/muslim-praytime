@@ -12,6 +12,11 @@ SearchBtn.addEventListener('click', ActionSearch);
 //get Search Result Element
 SearchResult.addEventListener('click', (e) => {
   GetCityLoc(e);
+
+  //remove hash on url bar
+  setTimeout(() => {
+    removeHash();
+  }, 5);
 });
 
 function GetCityLoc(e) {
@@ -175,4 +180,12 @@ function ShowResult(jsonResult) {
     //console.log(SearchHref);
     //htmlResult += `<a href="#" class="badge badge-light p-2 mr-3 mt-3">${jsonResult[i].name} (${jsonResult[i].country})</i>`;
   }
+}
+
+function removeHash() {
+  history.replaceState(
+    '',
+    document.title,
+    window.location.origin + window.location.pathname + window.location.search
+  );
 }

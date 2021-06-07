@@ -4,8 +4,10 @@ const SearchBtn = document.getElementById('search-btn');
 const SearchResult = document.getElementById('search-result');
 const TimeTable = document.getElementById('time-table');
 const CityName = document.getElementById('city-name');
-// const fileloc = 'test.json';
+const MadhabOption = document.querySelectorAll('input[name="madhab"]');
 const fileloc = './node_modules/cities.json/cities.json';
+let Madhab = '';
+
 //functions
 SearchBtn.addEventListener('click', ActionSearch);
 
@@ -18,6 +20,16 @@ SearchResult.addEventListener('click', (e) => {
     removeHash();
   }, 5);
 });
+
+function GetMadhabOption() {
+  for (const madopt of MadhabOption) {
+    if (madopt.checked) {
+      madhab = madopt.value;
+      break;
+    }
+  }
+  // console.log(madhab);
+}
 
 function GetCityLoc(e) {
   e.preventDefault;
@@ -47,9 +59,17 @@ function AppendPrayTimes(lat, lng, city) {
   // console.log(locale);
   const mydate = new Date();
 
+  GetMadhabOption();
+
   var coordinates = new adhan.Coordinates(lat, lng);
-  var params = adhan.CalculationMethod.MoonsightingCommittee();
-  params.madhab = adhan.Madhab.Hanafi;
+  var params = adhan.CalculationMethod.MuslimWorldLeague();
+  // params.madhab = adhan.Madhab.Shafi;
+  if (madhab === 'shafi') {
+    params.madhab = adhan.Madhab.Shafi;
+  } else {
+    params.madhab = adhan.Madhab.Hanafi;
+  }
+
   var prayerTimes = new adhan.PrayerTimes(coordinates, mydate, params);
   //console.log(dayjs.tz('2021-28-05 00:00', 'America/New_York'));
   const fajrTime = dayjs(prayerTimes.fajr).tz(locale).format('HH:mm');
@@ -85,7 +105,7 @@ function AppendPrayTimes(lat, lng, city) {
           </table>
   `;
   CityName.innerHTML = `Pray Time in ${city} (${locale}), Today ${dayjs().format(
-    'DD/MM/YYYY'
+    'DD-MM-YYYY'
   )}.`;
   TimeTable.innerHTML = prayTimeTable;
 }
@@ -120,6 +140,9 @@ function ActionSearch() {
     //     console.log(this.statusText);
     //   }
     // };
+
+    //check radio button
+
     fetch(fileloc)
       .then(function (res) {
         return res.json();

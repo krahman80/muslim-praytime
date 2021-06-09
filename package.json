@@ -22,5 +22,6 @@
     "cities.json": "^1.1.5",
     "dayjs": "^1.10.5",
     "tz-lookup": "^6.1.25"
-  }
+  },
+  "devDependencies": {}
 }

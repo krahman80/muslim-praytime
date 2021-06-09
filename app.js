@@ -13,6 +13,8 @@ SearchBtn.addEventListener('click', ActionSearch);
 
 //get Search Result Element
 SearchResult.addEventListener('click', (e) => {
+  e.preventDefault;
+  e.stopPropagation;
   GetCityLoc(e);
 
   //remove hash on url bar
@@ -32,9 +34,6 @@ function GetMadhabOption() {
 }
 
 function GetCityLoc(e) {
-  e.preventDefault;
-  e.stopPropagation;
-
   const info = e.path.find((item) => {
     if (item.classList) {
       return item.classList.contains('badge');
@@ -51,6 +50,11 @@ function GetCityLoc(e) {
     //console.log(lat + ' - ' + lng);
     AppendPrayTimes(lat, lng, city);
   }
+
+  // scroll({
+  //   top: offsetTop,
+  //   behavior: 'smooth',
+  // });
 }
 
 function AppendPrayTimes(lat, lng, city) {
@@ -141,8 +145,6 @@ function ActionSearch() {
     //   }
     // };
 
-    //check radio button
-
     fetch(fileloc)
       .then(function (res) {
         return res.json();
@@ -166,7 +168,8 @@ function ActionSearch() {
           ShowResult(newData);
         } else {
           // console.log('data not found');
-          SearchResult.innerHTML = 'City name not found!';
+          const ErrTag = `<p class="text-danger">City Name not found!</p>`;
+          SearchResult.innerHTML = ErrTag;
         }
         // console.log(newData);
         //console.log(typeof newData);
@@ -181,14 +184,15 @@ function ActionSearch() {
 
 function ShowResult(jsonResult) {
   //const jsonResult = JSON.parse(resultText);
-  //console.log(jsonResult);
+
   // jsonResult.forEach(function (res) {
   //   console.log(res.name);
   // });
+
   for (let i = 0; i < jsonResult.length; i++) {
     // console.log(jsonResult[i].name);
     const SearchHref = document.createElement('a');
-    SearchHref.href = '#';
+    SearchHref.href = '#time-table';
     SearchHref.title = jsonResult[i].name;
     SearchHref.classList.add('badge', 'badge-light', 'p-2', 'mr-3', 'mt-3');
     SearchHref.setAttribute('data-cityName', jsonResult[i].name);

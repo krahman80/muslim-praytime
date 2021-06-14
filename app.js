@@ -84,29 +84,17 @@ function AppendPrayTimes(lat, lng, city) {
   const ishaTime = dayjs(prayerTimes.isha).tz(locale).format('HH:mm');
   //console.log(fajrTime + '/' + sunriseTime + '/' + dhuhrTime + '/' + asrTime);
   ClearPrayTable();
-  const prayTimeTable = `
-  <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Fajr</th>
-                <th scope="col">Duhr</th>
-                <th scope="col">Asr</th>
-                <th scope="col">Magrib</th>
-                <th scope="col">Isha</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>${fajrTime}</td>
-                <td>${dhuhrTime}</td>
-                <td>${asrTime}</td>
-                <td>${maghribTime}</td>
-                <td>${ishaTime}</td>
-              </tr>
-            </tbody>
-          </table>
+
+  //table generated dynamically
+  const prayTimeTable = `  
+  <tr>
+    <th scope="row">1</th>
+    <td>${fajrTime}</td>
+    <td>${dhuhrTime}</td>
+    <td>${asrTime}</td>
+    <td>${maghribTime}</td>
+    <td>${ishaTime}</td>
+  </tr>
   `;
   CityName.innerHTML = `Pray Time in ${city} (${locale}), Today ${dayjs().format(
     'DD-MM-YYYY'

@@ -1,3 +1,22 @@
 .badge {
   cursor: pointer;
 }
+
+header.masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url('../assets/img/bg-masthead.jpg') no-repeat center center;
+  background-size: auto;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+header.masthead:before {
+  content: '';
+  position: absolute;
+  background-color: #1c375e;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+}

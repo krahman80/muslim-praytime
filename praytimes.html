@@ -10,6 +10,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   <link rel="stylesheet" href="bootstrap.min.css" />
+  <link rel="stylesheet" href="main.css">
   <script src="./node_modules/adhan/Adhan.js"></script>
   <script src="./node_modules/tz-lookup/tz.js"></script>
   <script src="./node_modules/dayjs/dayjs.min.js"></script>
@@ -19,13 +20,74 @@
 </head>
 
 <body>
-  <div class="container">
-    <!-- search bar -->
-    <div class="row py-3 px-3">
-      <!-- <p>Find praying times</p> -->
-      <h1 class="col text-center my-2">Find Prayer times</h1>
+  <header class="masthead">
+    <div class="container position-relative">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="text-center text-white">
+            <!-- Page heading-->
+            <h1 class="display-4">Find Prayer times</h1>
+            <p class="lead py-2">Find prayer time on your location</p>
+            <!-- Signup form-->
+            <form>
+              <div class="input-group input-group-sm">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search-term"
+                  placeholder="City Name"
+                  aria-label="City Name"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    id="search-btn"
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="d-flex justify-content-start text-white mt-3 mb-0 p-0">
+            <fieldset class="form-group">
+              <legend class="lead">Madhab option</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="radio"
+                    class="form-check-input madhab-opt"
+                    name="madhab"
+                    value="shafi"
+                    checked
+                  />
+                  shafi
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="radio"
+                    class="form-check-input madhab-opt"
+                    name="madhab"
+                    value="hanafi"
+                  />
+                  hanafi
+                </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="row py-3 px-3">
+  </header>
+  
+    <!-- search bar -->
+    <!-- <div class="row py-3 px-3">
+      <h1 class="col text-center my-2">Find Prayer times</h1>
+    </div> -->
+    <!-- <div class="row py-3 px-3">
       <div class="input-group">
         <input type="text" class="form-control" id="search-term" placeholder="Search city" />
         <div class="input-group-append">
@@ -34,7 +96,7 @@
           </button>
         </div>
       </div>
-      <div class='py-2'>
+      <div class="py-2">
         <div class="form-check-inline">
           <label class="form-check-label">
             <input type="radio" class="form-check-input madhab-opt" value='shafi' name="madhab" checked>Madhab shafi
@@ -46,12 +108,14 @@
           </label>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- end -->
     <!-- city search result -->
+    <section class="testimonials py-4">
+<div class="container">
     <div class="row py-3 px-3 my-3">
       <div>
-        <h5>Search Result</h5>
+        <h3 class="mb-2">Search Result</h5>
         <div id="search-result">
           <!-- <a href="#" class="badge badge-dark  p-2 mr-3 mt-3">result 01</a>
           <a href="#" class="badge badge-info  p-2 mr-3 mt-3">result 02</a>
@@ -63,11 +127,28 @@
     <!-- city praying time -->
     <div class="row py-3 px-3 my-3">
       <h5 id="city-name"></h5>
-      <div class="col-sm-12 p-0 m-0" id="time-table"></div>
+      <div class="col-sm-12 p-0 m-0" >
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fajr</th>
+              <th scope="col">Duhr</th>
+              <th scope="col">Asr</th>
+              <th scope="col">Magrib</th>
+              <th scope="col">Isha</th>
+            </tr>
+          </thead>
+          <tbody id="time-table">
+            
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <!-- end -->
   </div>
+  </section>
 
   <script>
     // var date = new Date();

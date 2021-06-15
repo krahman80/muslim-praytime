@@ -11,3 +11,9 @@ To Do list
 - o̶n̶ c̶i̶t̶y̶ c̶l̶i̶c̶k̶,̶ c̶h̶a̶n̶g̶e̶ f̶o̶c̶u̶s̶ t̶o̶ t̶i̶m̶e̶-̶t̶a̶b̶l̶e̶
 - r̶e̶p̶l̶a̶c̶e̶ t̶a̶b̶l̶e̶,̶ n̶o̶t̶ a̶l̶l̶ d̶i̶n̶a̶m̶i̶c̶a̶l̶l̶y̶ g̶e̶n̶e̶r̶a̶t̶e̶d̶,̶ o̶n̶l̶y̶ t̶a̶b̶l̶e̶ b̶o̶d̶y̶ g̶e̶n̶e̶r̶a̶t̶e̶d̶ d̶i̶n̶a̶m̶i̶c̶a̶l̶l̶y̶
 - update bootstrap layout
+
+
+
+Apps Screenshot
+
+[My image](krahman80.github.com/krahman80.github.io/assets/img/pray-time-screenshot.png)

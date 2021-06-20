@@ -4,7 +4,9 @@ const SearchBtn = document.getElementById('search-btn');
 const SearchResult = document.getElementById('search-result');
 const TimeTable = document.getElementById('time-table');
 const CityName = document.getElementById('city-name');
-const MadhabOption = document.querySelectorAll('input[name="madhab"]');
+const MadhabOption = document.querySelectorAll(
+  'input[name="madhab"]',
+);
 const fileloc = './node_modules/cities.json/cities.json';
 let Madhab = '';
 
@@ -74,13 +76,23 @@ function AppendPrayTimes(lat, lng, city) {
     params.madhab = adhan.Madhab.Hanafi;
   }
 
-  var prayerTimes = new adhan.PrayerTimes(coordinates, mydate, params);
+  var prayerTimes = new adhan.PrayerTimes(
+    coordinates,
+    mydate,
+    params,
+  );
   //console.log(dayjs.tz('2021-28-05 00:00', 'America/New_York'));
   const fajrTime = dayjs(prayerTimes.fajr).tz(locale).format('HH:mm');
-  const sunriseTime = dayjs(prayerTimes.sunrise).tz(locale).format('HH:mm');
-  const dhuhrTime = dayjs(prayerTimes.dhuhr).tz(locale).format('HH:mm');
+  const sunriseTime = dayjs(prayerTimes.sunrise)
+    .tz(locale)
+    .format('HH:mm');
+  const dhuhrTime = dayjs(prayerTimes.dhuhr)
+    .tz(locale)
+    .format('HH:mm');
   const asrTime = dayjs(prayerTimes.asr).tz(locale).format('HH:mm');
-  const maghribTime = dayjs(prayerTimes.maghrib).tz(locale).format('HH:mm');
+  const maghribTime = dayjs(prayerTimes.maghrib)
+    .tz(locale)
+    .format('HH:mm');
   const ishaTime = dayjs(prayerTimes.isha).tz(locale).format('HH:mm');
   //console.log(fajrTime + '/' + sunriseTime + '/' + dhuhrTime + '/' + asrTime);
   ClearPrayTable();
@@ -97,7 +109,7 @@ function AppendPrayTimes(lat, lng, city) {
   </tr>
   `;
   CityName.innerHTML = `Pray Time in ${city} (${locale}), Today ${dayjs().format(
-    'DD-MM-YYYY'
+    'DD-MM-YYYY',
   )}.`;
   TimeTable.innerHTML = prayTimeTable;
 }
@@ -182,12 +194,18 @@ function ShowResult(jsonResult) {
     const SearchHref = document.createElement('a');
     SearchHref.href = '#time-table';
     SearchHref.title = jsonResult[i].name;
-    SearchHref.classList.add('badge', 'badge-light', 'p-2', 'mr-3', 'mt-3');
+    SearchHref.classList.add(
+      'badge',
+      'badge-light',
+      'p-2',
+      'mr-3',
+      'mt-3',
+    );
     SearchHref.setAttribute('data-cityName', jsonResult[i].name);
     SearchHref.setAttribute('data-lat', jsonResult[i].lat);
     SearchHref.setAttribute('data-lng', jsonResult[i].lng);
     const SearchNode = document.createTextNode(
-      jsonResult[i].name + ' (' + jsonResult[i].country + ')'
+      jsonResult[i].name + ' (' + jsonResult[i].country + ')',
     );
     SearchHref.appendChild(SearchNode);
     SearchResult.appendChild(SearchHref);
@@ -201,6 +219,8 @@ function removeHash() {
   history.replaceState(
     '',
     document.title,
-    window.location.origin + window.location.pathname + window.location.search
+    window.location.origin +
+      window.location.pathname +
+      window.location.search,
   );
 }

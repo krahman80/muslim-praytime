@@ -4,7 +4,12 @@
   "description": "appliction for calculating Muslim praying times.",
   "main": "PrayTimes.js",
   "scripts": {
-    "test": "npm test"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint --ext .js",
+    "lint:fix": "npm run lint -- --fix",
+    "prettier": "npx prettier --check *.js",
+    "prettier:fix": "npm run prettier -- --write",
+    "format": "npm run prettier:fix && npm run lint:fix"
   },
   "repository": {
     "type": "git",
@@ -23,5 +28,8 @@
     "dayjs": "^1.10.5",
     "tz-lookup": "^6.1.25"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0"
+  }
 }
